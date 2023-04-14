@@ -57,6 +57,7 @@ body {
   
   button {
     padding: 0;
+    margin-left: 3px;
     border: none;
     font-family: "Architects Daughter", cursive;
     text-decoration: none;
