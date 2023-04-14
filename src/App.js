@@ -35,7 +35,7 @@ function App() {
           {todos.map((todo) => (
             <li key={todo.id}>
               {todo.text}
-              <button onClick={() => handleDelete(todo.id)}>Delete</button>
+              <button onClick={() => handleDelete(todo.id)}><span>Delete</span></button>
             </li>
           ))}
         </ul>
