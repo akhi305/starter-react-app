@@ -1,19 +1,21 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
+import ToDoItem from "./ToDoItem";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!inputValue.trim()) return;
-    setTodos([...todos, { id: todos.length + 1, text: inputValue }]);
-    setInputValue("");
-  };
+  function handleChange(event) {
+    const newValue = event.target.value;
+    setInputText(newValue);
+  }
 
-  const handleDelete = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
+  function addItem() {
+    setItems((prevItems) => {
+      return [...prevItems, inputText];
+    });
+    setInputText("");
+  }
 
   return (
     <div className="container">
@@ -21,22 +23,15 @@ function App() {
         <h1>To-Do List</h1>
       </div>
       <div className="form">
-        <input
-          onChange={(e) => setInputValue(e.target.value)}
-          type="text"
-          value={inputValue}
-        />
-        <button onClick={handleSubmit}>
+        <input onChange={handleChange} type="text" value={inputText} />
+        <button onClick={addItem}>
           <span>Add</span>
         </button>
       </div>
       <div>
         <ul>
-          {todos.map((todo) => (
-            <li key={todo.id}>
-              {todo.text}
-              <button onClick={() => handleDelete(todo.id)}>Delete</button>
-            </li>
+          {items.map((todoItem) => (
+            <ToDoItem text={todoItem} />
           ))}
         </ul>
       </div>
